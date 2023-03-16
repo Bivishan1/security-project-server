@@ -35,7 +35,7 @@ import "./userDetails.cjs";
 
 const User = model("UserInfo");
 
-const sendVerifyemail = async (name, email, user_id) => {
+const sendVerifyemail = async (name, email, userId) => {
     try {
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
@@ -51,7 +51,7 @@ const sendVerifyemail = async (name, email, user_id) => {
             from: 'sapkotabivishan@gmail.com',
             to: email,
             subject: "Verification Email",
-            html: '<p> Hi ' + name + 'Please Click this link <a href="http://localhost:3000/verify?id=' + user_id + '">Verify </a> to verify.</p>'
+            html: '<p> Hi ' + name + 'Please Click this link <a href="http://localhost:3000/verify?id=' + userId + '">Verify </a> to verify.</p>'
         }
         transporter.sendMail(mailOption, function (err, info) {
             if (err) {
@@ -82,7 +82,7 @@ app.get("/user/:id", async (req, res) => {
 });
 
 
-app.patch("/verify", async (req, res) => {
+app.post("/verify", async (req, res) => {
 
     try {
 
